@@ -1,0 +1,117 @@
+@font-face {
+    font-family: "hebaru";
+    src: url("fonts/hebaru.ttf");
+}
+
+html, body, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "hebaru";
+}
+
+header {
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: dodgerblue;
+}
+.headerInside {
+    margin: 0 auto;
+    width: 1170px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-cart {
+    padding: 5px 15px 5px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: dodgerblue;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+.btn-cart:hover {
+    color: white;
+    background-color: dodgerblue;
+    transition: 0.4s;
+}
+.btn-cart:active {
+    color: #1b407f;
+    border: 3px solid #1b407f;
+}
+
+main {
+    width: 100%;
+}
+
+.products {
+    margin: 0 auto;
+    width: 1170px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-item {
+    padding: 10px;
+    margin-right: 4%;
+    margin-bottom: 20px;
+    border: 2px solid dodgerblue;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.product-item:nth-child(4n) {
+    margin-right: 0;
+}
+
+.desc {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.desc h3 {
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+.desc p {
+    width: 100%;
+    padding-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 2px;
+    color: #1b407f;
+}
+
+.buy-btn {
+    padding: 5px 15px 5px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: dodgerblue;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: white;
+    border: 2px solid dodgerblue;
+    border-radius: 10px;
+}
+.buy-btn:hover {
+    color: white;
+    background-color: dodgerblue;
+    transition: 0.4s;
+}
+.buy-btn:active {
+    color: #1b407f;
+    border: 2px solid #1b407f;
+}
