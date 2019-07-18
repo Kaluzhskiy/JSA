@@ -24,23 +24,52 @@
             </div>
         </div>
     </header>
-    <h1>{{ test }}</h1>
     <main>
         <div class="products"></div>
+        <div class ="goods-list">
+            <div class ="goods-item" v-for ="good in filteredGoods">
+                <h3>{{ good.product_name }}</h3>
+                <p>{{ good.price }}</p>
+            </div>
+        </div>
     </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/main.js"></script>
 <script>
     const app = new Vue({
         el: '#app',
         data: {
-            test : 'good test',
+            goods: [],
+            filteredGoods: [],
+            seachLine: [],
         },
         methods: {
-
+            makeGETRequest(url, callback) {
+                const API_URL =
+                    'https://raw.githubusercontent.com/Kaluzhskiy/online-store-api/master/responses';
+                let xhr;
+                if ( window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else if ( window.ActiveXObject) {
+                    xhr = new ActiveXObject( "Microsoft.XMLHTTP" );
+                }
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 ) {
+                        callback(xhr.responseText);
+                    }
+                }
+                xhr.open( 'GET' , url, true );
+                xhr.send();
+            },
+            mounted() {
+                this .makeGETRequest( ` ${API_URL} /catalogData.json` , (goods) => {
+                    this.goods = goods;
+                    this.filteredGoods = goods;
+                });
+            }
         }
     });
 </script>
+<script src="js/main.js"></script>
 </body>
 </html>
