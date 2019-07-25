@@ -2,18 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
     <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-    <div class="headerInside">
-        <button class="btn-cart" type="button">Корзина</button>
-    </div>
-</header>
-<main>
-    <div class="products"></div>
-</main>
+<div id="app">
+    <header>
+        <div class="headerInside">
+            <div class="cart">
+                <form action="#" class="search-form">
+                    <input type="text" class="search-field">
+                    <button class="btn-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <button class="btn-cart" type="button">Корзина</button>
+                <div class="cart-block invisible"></div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="products"></div>
+        <div class ="goods-list">
+            <div class ="goods-item" v-for ="good in filteredGoods">
+                <h3>{{ good.product_name }}</h3>
+                <p>{{ good.price }}</p>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            goods: [],
+            filteredGoods: [],
+            seachLine: [],
+        },
+        methods: {
+            makeGETRequest(url, callback) {
+                const API_URL =
+                    'https://raw.githubusercontent.com/Kaluzhskiy/online-store-api/master/responses';
+                let xhr;
+                if ( window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else if ( window.ActiveXObject) {
+                    xhr = new ActiveXObject( "Microsoft.XMLHTTP" );
+                }
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 ) {
+                        callback(xhr.responseText);
+                    }
+                }
+                xhr.open( 'GET' , url, true );
+                xhr.send();
+            },
+            mounted() {
+                this .makeGETRequest( ` ${API_URL} /catalogData.json` , (goods) => {
+                    this.goods = goods;
+                    this.filteredGoods = goods;
+                });
+            }
+        }
+    });
+</script>
 <script src="js/main.js"></script>
 </body>
 </html>
